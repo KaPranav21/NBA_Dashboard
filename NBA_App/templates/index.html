@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NBA Player Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        form { margin-bottom: 20px; }
+        img { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>NBA Player Dashboard</h1>
+    <form method="post">
+        <input type="text" name="player_name" placeholder="Enter player name">
+        <input type="submit" value="Search">
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if table %}
+        <h2>Career Stats</h2>
+        {{ table|safe }}
+    {% endif %}
+
+    {% if plot_url %}
+        <h2>Points Per Season</h2>
+        <img src="data:image/png;base64,{{ plot_url }}">
+    {% endif %}
+</body>
+</html>

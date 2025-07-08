@@ -1,32 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>NBA Player Dashboard</title>
-    <style>
-        body { font-family: Arial; margin: 40px; }
-        form { margin-bottom: 20px; }
-        img { max-width: 100%; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBA Stats Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
-    <h1>NBA Player Dashboard</h1>
-    <form method="post">
-        <input type="text" name="player_name" placeholder="Enter player name">
-        <input type="submit" value="Search">
-    </form>
+  <h1>NBA Player Stats Dashboard</h1>
 
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
+  <input type="text" id="playerInput" placeholder="Enter NBA player name" />
+  <button onclick="search()">Search</button>
 
-    {% if table %}
-        <h2>Career Stats</h2>
-        {{ table|safe }}
-    {% endif %}
+  <div id="error"></div>
 
-    {% if plot_url %}
-        <h2>Points Per Season</h2>
-        <img src="data:image/png;base64,{{ plot_url }}">
-    {% endif %}
+  <div id="statsTable"></div>
+
+<img id="plotImage" alt="Points per season plot" style="display: none;" />
+<div id="physicalsTable" style="margin-top: 20px;"></div>
+
 </body>
 </html>

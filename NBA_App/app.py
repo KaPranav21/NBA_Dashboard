@@ -13,9 +13,10 @@ def index():
 @app.route("/api/player", methods=["POST"])
 def player_api():
     data = request.json
-    name = data.get("player_name", "").strip()
-    result = get_player_stats(name)
+    name = data.get("player_name", "").strip()    
+    stat = data.get("stat_name", "PTS")
 
+    result = get_player_stats(name, stat)
     if "error" in result:
         return jsonify(result), 404
 

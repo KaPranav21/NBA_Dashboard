@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import io, base64
 from nba_api.stats.endpoints import commonplayerinfo
 
-def get_player_stats(player_name):
+def get_player_stats(player_name, stat_name="PTS"):
     player_id = get_player_id(player_name)
     if not player_id:
         return {"error": f"Player '{player_name}' not found."}
@@ -16,7 +16,7 @@ def get_player_stats(player_name):
         return {"error": f"No NBA stats for {player_name}."}
 
     physicals = get_player_physicals(player_id)
-    plot_base64 = generate_plot(df, player_name)
+    plot_base64 = generate_plot(df, player_name, stat_name)
 
     return {
         "table": df[["SEASON_ID", "TEAM_ABBREVIATION", "GP", "PTS", "REB", "AST"]].to_dict(orient="records"),
@@ -45,12 +45,17 @@ def get_player_physicals(player_id):
     age = calculate_age(birthdate)
     return {"height": height, "weight": weight, "age": age}
 
-def generate_plot(df, name):
+def generate_plot(df, name, stat_name):
     fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(df["SEASON_ID"], df["PTS"], marker="o", color="royalblue", linewidth=2)
-    ax.set_title(f"{name.title()}: Points Per Season")
+
+    # Check if stat_name is in the dataframe
+    if stat_name not in df.columns:
+        stat_name = "PTS"  # fallback to points if invalid
+
+    ax.plot(df["SEASON_ID"], df[stat_name], marker="o", color="royalblue", linewidth=2)
+    ax.set_title(f"{name.title()}: {stat_name} Per Season")
     ax.set_xlabel("Season")
-    ax.set_ylabel("Total Points")
+    ax.set_ylabel(stat_name)
     plt.xticks(rotation=45)
     plt.tight_layout()
 
@@ -60,6 +65,7 @@ def generate_plot(df, name):
     encoded = base64.b64encode(buf.read()).decode('utf-8')
     plt.close(fig)
     return encoded
+
 
 def calculate_age(birthdate_str):
     birthdate = datetime.strptime(birthdate_str, "%Y-%m-%dT%H:%M:%S")

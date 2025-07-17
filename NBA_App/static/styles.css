@@ -56,18 +56,30 @@ th {
   background-color: #ffe0e0;
 }
 
-img {
-  margin-top: 30px;
-  max-width: 90%;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
 #plotImage {
   display: none;
-  margin: 30px auto;
-  display: block;
+  margin: 20px auto 0 auto;
   max-width: 90%;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.autocomplete-items {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  z-index: 1000;
+}
+.autocomplete-item {
+  padding: 8px;
+  cursor: pointer;
+}
+.autocomplete-item:hover,
+.autocomplete-active {
+  background-color: #e9e9e9;
 }

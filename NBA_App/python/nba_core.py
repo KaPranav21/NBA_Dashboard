@@ -16,13 +16,14 @@ def get_player_stats(player_name):
         return {"error": f"No NBA stats for {player_name}."}
 
     physicals = get_player_physicals(player_id)
-    plot = generate_plot(df, player_name)
+    plot_base64 = generate_plot(df, player_name)
 
     return {
         "table": df[["SEASON_ID", "TEAM_ABBREVIATION", "GP", "PTS", "REB", "AST"]].to_dict(orient="records"),
-        "plot": plot,
+        "plot": plot_base64,
         "physicals": physicals
     }
+
 
 def get_player_id(name):
     player = players.find_players_by_full_name(name)
@@ -46,7 +47,7 @@ def get_player_physicals(player_id):
 
 def generate_plot(df, name):
     fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(df["SEASON_ID"], df["PTS"], marker="o")
+    ax.plot(df["SEASON_ID"], df["PTS"], marker="o", color="royalblue", linewidth=2)
     ax.set_title(f"{name.title()}: Points Per Season")
     ax.set_xlabel("Season")
     ax.set_ylabel("Total Points")
@@ -56,8 +57,8 @@ def generate_plot(df, name):
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
     buf.seek(0)
-    encoded = base64.b64encode(buf.read()).decode("utf-8")
-    plt.close()
+    encoded = base64.b64encode(buf.read()).decode('utf-8')
+    plt.close(fig)
     return encoded
 
 def calculate_age(birthdate_str):

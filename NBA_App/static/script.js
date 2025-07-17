@@ -1,6 +1,7 @@
 async function search() {
   const name = getPlayerInput();
-  const data = await fetchPlayerData(name);
+  const stat = document.getElementById("statSelect").value;
+  const data = await fetchPlayerData(name, stat);
 
   if (data.error) {
     showError(data.error);
@@ -14,11 +15,11 @@ async function search() {
 }
 
 // Helper: Fetch player data from API
-async function fetchPlayerData(name) {
+async function fetchPlayerData(name, stat) {
   const response = await fetch("/api/player", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ player_name: name })
+    body: JSON.stringify({player_name: name, stat_name: stat})
   });
   return await response.json();
 }

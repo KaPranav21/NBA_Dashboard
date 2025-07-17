@@ -11,6 +11,16 @@
   <h1>NBA Player Stats Dashboard</h1>
   <input id="playerInput" list="playerList" oninput="updateSuggestions()" />
   <datalist id="playerList"></datalist>
+
+  <select id="statSelect">
+    <option value="PTS">Points</option>
+    <option value="REB">Rebounds</option>
+    <option value="AST">Assists</option>
+    <option value="FG_PCT">FG%</option>
+    <option value="STL">Steals</option>
+    <option value="BLK">Blocks</option>
+  </select>
+
   <button onclick="search()">Search</button>
 
   <div id="error"></div>

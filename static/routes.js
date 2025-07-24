@@ -9,11 +9,10 @@ async function search() {
     clearErrors();
   } else {
     clearErrors();
-    document.getElementById("player-name").innerText = data.name;
-    console.log(data.name)
+    console.log(name, ' becomes ', data.name)
     renderStatsTable(data.table);
     renderPlotImage(data.plot);
-    renderPhysicalsTable(data.physicals);
+    renderPhysicalsTable(data.physicals, data.name);
     renderAveragesTable(data.averages);
   }
 }
@@ -120,13 +119,13 @@ function renderPlotImage(plotBase64) {
 }
 
 // Render player physical attributes table
-function renderPhysicalsTable(phys) {
+function renderPhysicalsTable(phys, player_name) {
   if (!phys) {
     document.getElementById("physicalsTable").innerHTML = "<p>No physical data available.</p>";
     return;
   }
   let physHtml = 
-    `<h3>Player Physicals</h3>
+    `<h3>${player_name}</h3>
     <table border="1" class="physicals-table">
       <tr><th>Attribute</th><th>Value</th></tr>
       <tr><td>Height</td><td>${phys.height || "N/A"}</td></tr>

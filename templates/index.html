@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NBA Player Stats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>NBA Player Stats Search</h1>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" id="playerInput" list="playerList" placeholder="Enter player name..." oninput="updateSuggestions()" />
+      <datalist id="playerList"></datalist>
+
+      <select id="statSelect">
+        <option value="PTS">Points</option>
+        <option value="AST">Assists</option>
+        <option value="REB">Rebounds</option>
+        <option value="STL">Steals</option>
+        <option value="BLK">Blocks</option>
+      </select>
+
+      <button onclick="search()">Search</button>
+      <div id="autocomplete"></div>
+    </div>
+
+    <div id="error" class="error"></div>
+
+    <!-- Player Info Section: Name and Physicals side by side, centered -->
+    <div id="player-info" class="centered-row">
+      <h2 id="player-name"></h2>
+      <div id="physicalsTable"></div>
+    </div>
+
+    <!-- Bottom Section: Plot and stats side by side -->
+    <div id="bottom-section" class="flex-row">
+      <div id="plotContainer" class="column">
+        <h3>Stat Trend</h3>
+        <div id="plotImage"></div>
+      </div>
+
+      <div id="stats-section" class="column">
+        <div id="averagesTable"></div>
+
+        <div id="seasonStatsContainer">
+          <h3>Season Stats</h3>
+          <div id="statsTable"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

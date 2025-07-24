@@ -1,85 +1,175 @@
+/* Global Styles */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #ffffff;
-  color: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffe0e0;
   margin: 0;
   padding: 20px;
-  text-align: center;
+  color: #440404;
 }
 
+/* Title */
 h1 {
-  color: #440404;
+  text-align: center;
   margin-bottom: 30px;
 }
 
+/* Search Bar */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Player Info: Name and Physicals side-by-side and centered */
+.centered-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.name-physicals {
+  text-align: center;
+}
+
+/* Bottom Section: Plot + Stats side by side */
+.flex-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+}
+
+/* Columns inside bottom section */
+.column {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Headings inside bottom section */
+#plotContainer h3, 
+#seasonStatsContainer h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Input & Button */
 input[type="text"] {
   padding: 10px;
-  width: 300px;
+  margin-right: 10px;
+  border: 2px solid #a04141;
+  border-radius: 4px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #440404;
+  outline: none;
 }
 
 button {
   padding: 10px 20px;
   background-color: #a04141;
-  color: white;
-  font-size: 16px;
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
-  margin-left: 10px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #3a0c0c;
+  background-color: #440404;
 }
 
-#error {
-  color: red;
-  margin: 20px 0;
+button:focus-visible {
+  outline: 2px solid #440404;
 }
 
+/* Tables */
 table {
-  margin: 20px auto;
+  width: 100%;
   border-collapse: collapse;
-  width: 80%;
-  background-color: white;
+  margin-top: 20px;
+  background-color: #fff0f0;
+  color: #440404;
+  overflow-x: auto;
+  display: block;
 }
 
 th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  border: 1px solid #a04141;
+  padding: 12px 15px;
+  text-align: left;
 }
 
 th {
-  background-color: #ffe0e0;
+  background-color: #a04141;
+  color: white;
 }
 
-#plotImage {
-  display: none;
-  margin: 20px auto 0 auto;
-  max-width: 90%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+tr:nth-child(even) {
+  background-color: #ffe6e6;
 }
 
-.autocomplete-items {
-  position: relative;
-  width: 300px;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-top: none;
-  max-height: 200px;
-  overflow-y: auto;
-  background: white;
-  z-index: 1000;
+/* Section Tables */
+#averagesTable,
+#physicalsTable {
+  margin-top: 20px;
+  border: 2px solid #a04141;
+  background-color: #fff0f0;
 }
-.autocomplete-item {
-  padding: 8px;
-  cursor: pointer;
+
+#averagesTable th,
+#physicalsTable th {
+  background-color: #a04141;
+  color: white;
 }
-.autocomplete-item:hover,
-.autocomplete-active {
-  background-color: #e9e9e9;
+
+#averagesTable td,
+#physicalsTable td {
+  border: 1px solid #a04141;
+  padding: 10px;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .centered-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flex-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  input[type="text"],
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Season stats table overrides */
+#statsTable table {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+.name-physicals {
+  text-align: center;
+}
+
+#physicalsTable {
+  margin-top: 101px; /* Adjust the gap here */
 }

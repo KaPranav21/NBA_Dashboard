@@ -1,10 +1,11 @@
+# app.py
 from flask import Flask, request, jsonify, render_template
 from python.nba_core import get_player_stats, players
 
+app = Flask(__name__)
+
 player_list = players.get_players()
 player_names = [p["full_name"] for p in player_list]
-
-app = Flask(__name__)
 
 @app.route("/")
 def index():
@@ -14,19 +15,18 @@ def index():
 def player_api():
     data = request.json
     name = data.get("player_name", "").strip()    
-    stat = data.get("stat_name", "PTS")
-
-    result = get_player_stats(name, stat)
+    result = get_player_stats(name)
+    
+    print({k: ("[omitted]" if k == "plot" else v) for k, v in result.items()})
     if "error" in result:
         return jsonify(result), 404
-
     return jsonify(result)
 
 @app.route("/api/autocomplete")
 def autocomplete():
     query = request.args.get("q", "").lower()
     matches = [name for name in player_names if query in name.lower()]
-    return jsonify(matches[:25])  # Return top 10 matches
+    return jsonify(matches[:25])
 
 if __name__ == "__main__":
     app.run(debug=True)

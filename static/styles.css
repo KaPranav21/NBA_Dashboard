@@ -173,3 +173,10 @@ tr:nth-child(even) {
 #physicalsTable {
   margin-top: 101px; /* Adjust the gap here */
 }
+
+#plotImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

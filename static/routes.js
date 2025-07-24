@@ -127,7 +127,6 @@ function renderPhysicalsTable(phys, player_name) {
   let physHtml = 
     `<h3>${player_name}</h3>
     <table border="1" class="physicals-table">
-      <tr><th>Attribute</th><th>Value</th></tr>
       <tr><td>Height</td><td>${phys.height || "N/A"}</td></tr>
       <tr><td>Weight</td><td>${phys.weight ? phys.weight + " lbs" : "N/A"}</td></tr>
       <tr><td>Age</td><td>${phys.age || "N/A"}</td></tr>

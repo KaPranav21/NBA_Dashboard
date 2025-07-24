@@ -31,20 +31,28 @@
     <div id="error" class="error"></div>
 
     <!-- Player Info Section: Name and Physicals side by side, centered -->
-    <div id="player-info" class="centered-row">
-      <h2 id="player-name"></h2>
-      <div id="physicalsTable"></div>
+    <div class="row">
+      <!-- Left Column -->
+      <div class="column left">
+        <div id="physicalsTable"></div> <!-- Attributes here -->
+      </div>
+
+      <!-- Right Column -->
+      <div class="column right">
+        <div id="averagesTable"></div>
+      </div>
     </div>
 
+
     <!-- Bottom Section: Plot and stats side by side -->
-    <div id="bottom-section" class="flex-row">
+    <div id="bottom-section" class="row">
       <div id="plotContainer" class="column">
         <h3>Stat Trend</h3>
         <img id="plotImage"></img>
       </div>
 
       <div id="stats-section" class="column">
-        <div id="averagesTable"></div>
+        <!-- <div id="averagesTable"></div> -->
 
         <div id="seasonStatsContainer">
           <h3>Season Stats</h3>
@@ -55,6 +63,6 @@
   </div>
 
   <!-- Script -->
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('routes', filename='routes.js') }}"></script>
 </body>
 </html>

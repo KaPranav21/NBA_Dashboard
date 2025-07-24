@@ -13,6 +13,18 @@ h1 {
   margin-bottom: 30px;
 }
 
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h3 {
+  text-align: center;
+}
+
+container{
+  justify-content: center;
+}
 /* Search Bar */
 .search-bar {
   display: flex;
@@ -27,11 +39,13 @@ h1 {
 }
 
 /* Player Info: Name and Physicals side-by-side and centered */
-.centered-row {
+.row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  padding: 1rem;
 }
 
 .name-physicals {
@@ -45,17 +59,27 @@ h1 {
   gap: 40px;
   max-width: 900px;
   margin: 0 auto 40px auto;
+  flex-direction: column;
+  margin-top: 3rem;
 }
 
 /* Columns inside bottom section */
 .column {
   flex: 1;
-  min-width: 300px;
+  min-width: 100px; /* optional for responsiveness */
+}
+
+.left {
+  margin-right: 2rem;
+}
+
+.right {
+  margin-left: 2rem;
 }
 
 /* Headings inside bottom section */
-#plotContainer h3, 
-#seasonStatsContainer h3 {
+#plotContainer , #seasonStatsContainer {
+  display: flex;
   text-align: center;
   margin-bottom: 15px;
 }
@@ -126,6 +150,8 @@ tr:nth-child(even) {
   margin-top: 20px;
   border: 2px solid #a04141;
   background-color: #fff0f0;
+  justify-content: center;
+
 }
 
 #averagesTable th,
@@ -147,10 +173,6 @@ tr:nth-child(even) {
     align-items: center;
   }
 
-  .flex-row {
-    flex-direction: column;
-    gap: 20px;
-  }
 
   input[type="text"],
   button {
@@ -179,4 +201,24 @@ tr:nth-child(even) {
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+.centered-table, #physicalsTable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.centered-text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+
+#plotContainer, #stats-section {
+  flex: 1;
+  padding: 1rem;
 }

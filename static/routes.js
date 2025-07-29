@@ -1,21 +1,43 @@
-// Main search function triggered on button click
 async function search() {
+  const container = document.getElementById('container');
+  
+  if (container) {
+    // Add fade-out class, remove fade-in
+    container.classList.remove('fade-in');
+    container.classList.add('fade-out');
+  }
+
   const name = getPlayerInput();
-  const stat = document.getElementById("statSelect").value;  // make sure your <select> has id="statSelect"
+  const stat = document.getElementById("statSelect").value;
   const data = await fetchPlayerData(name, stat);
 
   if (data.error) {
     showError(data.error);
     clearErrors();
+    
+    // fade back in even on error so container is visible
+    if (container) {
+      container.classList.remove('fade-out');
+      container.classList.add('fade-in');
+    }
   } else {
     clearErrors();
-    console.log(name, ' becomes ', data.name)
     renderStatsTable(data.table);
     renderPlotImage(data.plot);
     renderPhysicalsTable(data.physicals, data.name);
     renderAveragesTable(data.averages);
+
+    // Wait a short moment to allow fade-out animation before fade-in
+    if (container) {
+      setTimeout(() => {
+        container.classList.remove('fade-out');
+        container.classList.add('fade-in');
+      }, 300); // match your CSS transition duration (1s), can tweak timing here
+    }
   }
 }
+
+
 
 // Fetch player data from backend API
 async function fetchPlayerData(name, stat) {
@@ -91,17 +113,48 @@ function renderStatsTable(table) {
     return;
   }
 
-  let html = "<table border='1'><thead><tr><th>Season</th><th>Team</th><th>GP</th><th>PTS</th><th>REB</th><th>AST</th></tr></thead><tbody>";
+  let html = `
+    <table border='1'>
+      <thead>
+        <tr>
+          <th>Season</th>
+          <th>Team</th>
+          <th>GP</th>
+          <th>MIN</th>
+          <th>PTS</th>
+          <th>REB</th>
+          <th>AST</th>
+          <th>STL</th>
+          <th>BLK</th>
+          <th>TOV</th>
+          <th>FG%</th>
+          <th>3P%</th>
+          <th>FT%</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
   table.forEach(row => {
-    html += `<tr>
-      <td>${row.SEASON_ID}</td>
-      <td>${row.TEAM_ABBREVIATION}</td>
-      <td>${row.GP}</td>
-      <td>${row.PTS}</td>
-      <td>${row.REB}</td>
-      <td>${row.AST}</td>
-    </tr>`;
+    html += `
+      <tr>
+        <td>${row.SEASON_ID}</td>
+        <td>${row.TEAM_ABBREVIATION}</td>
+        <td>${row.GP}</td>
+        <td>${row.MIN}</td>
+        <td>${row.PTS}</td>
+        <td>${row.REB}</td>
+        <td>${row.AST}</td>
+        <td>${row.STL}</td>
+        <td>${row.BLK}</td>
+        <td>${row.TOV}</td>
+        <td>${row.FG_PCT != null ? (row.FG_PCT * 100).toFixed(1) + "%" : "N/A"}</td>
+        <td>${row.FG3_PCT != null ? (row.FG3_PCT * 100).toFixed(1) + "%" : "N/A"}</td>
+        <td>${row.FT_PCT != null ? (row.FT_PCT * 100).toFixed(1) + "%" : "N/A"}</td>
+      </tr>
+    `;
   });
+
   html += "</tbody></table>";
   document.getElementById("statsTable").innerHTML = html;
 }
@@ -164,3 +217,12 @@ function renderAveragesTable(averages) {
     </table>`;
   document.getElementById("averagesTable").innerHTML = avgHtml;
 }
+  window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('container');
+    if (container) {
+      // Delay slightly if you want a smoother effect
+      setTimeout(() => {
+        container.classList.add('fade-in');
+      }, 100);
+    }
+  });

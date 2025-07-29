@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
-
-  <div class="container">
     <h1>NBA Player Stats Search</h1>
 
     <!-- Search bar -->
@@ -27,40 +25,30 @@
       <button onclick="search()">Search</button>
       <div id="autocomplete"></div>
     </div>
-
+    
+  <div id="container" class="container">
     <div id="error" class="error"></div>
 
     <!-- Player Info Section: Name and Physicals side by side, centered -->
-    <div class="row">
-      <!-- Left Column -->
-      <div class="column left">
-        <div id="physicalsTable"></div> <!-- Attributes here -->
-      </div>
-
-      <!-- Right Column -->
-      <div class="column right">
+    <div class="flex-row">
+        <div id="physicalsTable"></div>
         <div id="averagesTable"></div>
-      </div>
     </div>
 
-
-    <!-- Bottom Section: Plot and stats side by side -->
-    <div id="bottom-section" class="row">
-      <div id="plotContainer" class="column">
-        <h3>Stat Trend</h3>
-        <img id="plotImage"></img>
-      </div>
-
-      <div id="stats-section" class="column">
-        <!-- <div id="averagesTable"></div> -->
-
-        <div id="seasonStatsContainer">
-          <h3>Season Stats</h3>
-          <div id="statsTable"></div>
-        </div>
-      </div>
+<!-- Bottom Section: Season Stats above Plot -->
+<div id="bottom-section">
+  <div id="stats-section" class="column">
+    <div id="seasonStatsContainer">
+      <h3>Season Stats</h3>
+      <div id="statsTable"></div>
     </div>
   </div>
+
+  <div id="plotContainer" class="column">
+    <h3>Stat Trend</h3>
+    <img id="plotImage" />
+  </div>
+</div>
 
   <!-- Script -->
   <script src="{{ url_for('static', filename='routes.js') }}"></script>

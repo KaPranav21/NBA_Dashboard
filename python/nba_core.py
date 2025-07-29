@@ -26,7 +26,7 @@ def get_player_stats(player_name, stat_name="PTS"):
 
     return {
         "name": official_name,  # Return the official name here
-        "table": df[["SEASON_ID", "TEAM_ABBREVIATION", "GP", "PTS", "REB", "AST"]].to_dict(orient="records"),
+        "table": df[["SEASON_ID", "TEAM_ABBREVIATION", "GP", "MIN", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FG_PCT", "FG3_PCT", "FT_PCT"]].to_dict(orient="records"),
         "plot": plot_base64,
         "physicals": physicals,
         "averages": averages
